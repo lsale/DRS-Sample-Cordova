@@ -1,6 +1,7 @@
 #Exclude all
 platforms/*
 plugins/*
+node_modules/*
 
 # Mac
 .DS_Store
