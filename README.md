@@ -9,7 +9,7 @@
 1. Ensure Xcode is installed and add the iOS platform `cordova platform add ios`
 
 # Adding the LwA plugin
-You can write your own plugin or download one that is already available. In this example I'm using the [cordova-plugin-amazon-login](https://github.com/edu-com/cordova-plugin-amazon-login) and I have customised some files in the `/dash` directory of the project to use is with the `dash:replenish` scope
+You can write your own plugin or download one that is already available. In this example I'm using the [cordova-plugin-amazon-login](https://github.com/edu-com/cordova-plugin-amazon-login) and I have customised some files in the `/dash` directory of the project to use it with the `dash:replenish` scope
 
 1. Add the plugin to your project `cordova plugin add https://github.com/edu-com/cordova-plugin-amazon-login.git#v2.0.0 --variable IOS_API_KEY="your-key-here"`. Following all set-up instructions on the plugin github page.
 2. Copy the content of `dash/ios/` to `platforms/ios/DRSTeaserPage/Plugins/cordova-plugin-amazon-login/`. You will want to overwrite the file.
