@@ -2,7 +2,7 @@
 1. Clone the repository locally `git clone https://github.com/lsale/DRS-Sample-Cordova.git`
 2. Go into the newly cloned directory `cd DRS-Sample-Cordova` and run `npm install`
 
-#Adding Android support
+# Adding Android support
 1. Ensure the Android SDK is available locally and add the Android platform `cordova platform add android`
 
 # Adding iOS support
