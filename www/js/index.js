@@ -27,6 +27,7 @@ var deviceModel = ""; // The device Modeal ID from your DRS Developer Console
 var includeAllMarketplaces = true; // This must be set to false for production. It will show all the unreleased marketplaces that have not been certified yet
 var isTestDevice = true; // This must be set to false for production. Purchases placed by this device will be test only
 
+
 //Page specific variables
 var productName = "coffee"; // This will customise the product name at the top of the page
 var skipUri = null; // This will show the "Skip" button if set. It must be a URL
@@ -85,7 +86,7 @@ var lwa = {
             scope: drsScope,
             scope_data: scopeData
         };
-        window.AmazonLoginPlugin.authorize(options, function(success){
+        window.LoginWithAmazon.authorize(options, function(success){
             console.log(success);
         }, function(error){
             console.log(error);
