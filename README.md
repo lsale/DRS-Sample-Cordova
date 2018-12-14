@@ -1,21 +1,39 @@
-# DRS Cordova Sample
+# DRS Teaser Page Sample for Cordova
+Installing and running the DRS Teaser Page Sample for Cordova requires as little as 5 minutes.
+
+## Requirements
+To run this sample on iOS and Android, using the Cordova Plugin for Dash, you will need to have Xcode and the Android SDK installed locally.
+To customize this project for your smart device you will need an Amazon Developer account. Create one or sign into an existing one at [developer.amazon.com](https://developer.amazon.com/home.html)
+
+## Installing the sample (2 mins)
 1. Clone the repository locally `git clone https://github.com/lsale/DRS-Sample-Cordova.git`
 2. Go into the newly cloned directory `cd DRS-Sample-Cordova` and run `npm install`
 
-# Adding Android support
-1. Ensure the Android SDK is available locally and add the Android platform `cordova platform add android`
 
-# Adding iOS support
-1. Ensure Xcode is installed and add the iOS platform `cordova platform add ios`
+## Adding Android support (1 to 10 mins)
+**Requirement**: Android SDK must be available locally. Download it from the [Android website](https://developer.android.com/studio/).
+1. Add the Android platform: `cordova platform add android`
 
-# Adding the LwA plugin
-You can write your own plugin or download one that is already available. In this example I'm using the [cordova-plugin-amazon-login](https://github.com/edu-com/cordova-plugin-amazon-login) and I have customised some files in the `/dash` directory of the project to use it with the `dash:replenish` scope
+## Adding iOS support (1 to 10 mins)
+**Requirement**: Xcode must be installed. Download it from the Mac App Store.
+1. Add the iOS platform: `cordova platform add ios`
 
-1. Add the plugin to your project `cordova plugin add https://github.com/edu-com/cordova-plugin-amazon-login.git#v2.0.0 --variable IOS_API_KEY="your-key-here"`. Following all set-up instructions on the plugin github page.
-2. Copy the content of `dash/ios/` to `platforms/ios/DRSTeaserPage/Plugins/cordova-plugin-amazon-login/`. You will want to overwrite the file.
-3. Copy the content of `dash/android` to `platforms/android/src/com/education/`. You will want to overwrite this file.
+## Installing the Cordova Plugin for Dash (1 to 5 mins)
+The [cordova-plugin-login-with-amazon](https://github.com/lsale/cordova-plugin-login-with-amazon-dash.git) provides you with access to the Login with Amazon Mobile SDK and Single-Sign-On functionality for customers who have the Amazon Shopping app installed (i.e. they won't need to type their username and password). 
 
-# Finishing touches
-1. Customise the `www/js/index.js` file with your clientId from the [Security Profile](https://developer.amazon.com/iba-sp/view.html), the deviceModel from your [DRS console](https://developer.amazon.com/dash-replenishment/drs_console.html) and the serial number that you will read from the DRS-enabled device.
+### Installing the plugin in a custom project (5 min installation)
+In the terminal, cd to your Cordova project directory and type `cordova plugin add https://github.com/lsale/cordova-plugin-login-with-amazon --variable API_KEY=<KEY> --variable BUNDLE_NAME=<PACKAGE_NAME>`
+Where:
+* `API_KEY` is the iOS API Key 
+* `BUNDLE_NAME` is the iOS bundle name (ex. com.myproject.myapp)
+
+Instructions to customize the installation with your own API key and package name are available on the [plugin github page](https://github.com/lsale/cordova-plugin-login-with-amazon-dash.git).
+
+### Installing the plugin with sample credentials (1 min installation)
+If you haven't created an API key yet, and you just want to test out the sample, feel free to use the sample credentials and install the plugin as follows:
+* `cordova plugin add https://github.com/lsale/cordova-plugin-login-with-amazon --variable API_KEY=eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmQ0MWQ2OWYxZGJiNTQ2MThhNzNlM2MwN2E1MDc0ZjNlIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi5kYzQ4MWZmZGQ3OTM0NjY2YjBkNTdkYWExMGJiOTdlOCIsImJ1bmRsZVNlZWRJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJidW5kbGVJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJpc3MiOiJBbWF6b24iLCJ0eXBlIjoiQVBJS2V5IiwiYXBwVmFyaWFudElkIjoiYW16bjEuYXBwbGljYXRpb24tY2xpZW50LmViODZjMWE1MWIwYzRkOWE4ODM4NTE0NDg4OWQ4ZTA2IiwidHJ1c3RQb29sIjpudWxsLCJhcHBJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC5lYjg2YzFhNTFiMGM0ZDlhODgzODUxNDQ4ODlkOGUwNiIsImlkIjoiMTE3ZjMwYjMtZmZiZC0xMWU4LWI5OTItMTk4ZGQ5MTM3ZTRjIiwiaWF0IjoiMTU0NDgwNDgxNDIzMSJ9.jntLNSctn0/zOkFoeIEkoMPbcMSfUD2U6snrf0qsAljaG70HfvFgPa8VSIrMfhtEc1jzMWUuJW1M3ZM8mSC2B0RR3YBiu4K6mVdbZAeUaAjdUBFJmJAsfa9T+OixM+Fh6Bn/TYVPro4/DMFLzMv3rv4URifdIu+kpMwgQHYCJ8G7rFWLwfgPaCoNys0ADOz6iu3Yv++nU8xTnm8e3ekXvnA0RiXDa36cE2D+UeUw5yBlm4zyY54QmXnMwUc9nmcxPOUTOosiZh8CNokzsOShanisrZscBbwqy7W5eJOEyF3tIPYq4FeG234gJ754TTzksC6jwxhCBB6uMyRrQgROgA== --variable BUNDLE_NAME=com.amazon.drs.drsteaserpage`
+
+## Customizing the Cordova Sample
+You can customize the sample`www/js/index.js` file with your clientId from the [Security Profile](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html), the deviceModel from your [DRS console](https://developer.amazon.com/dash-replenishment/drs_console.html) and the serial number that you will read from the DRS-enabled device.
 2. Run `cordova prepare`
-3. Run the app in the simulator.
+3. Run `cordova build` 

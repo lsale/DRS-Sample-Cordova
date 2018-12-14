@@ -17,13 +17,13 @@
  * under the License.
  */
 
- /* 
+/* 
 *   Modify below here
 */
+
 // Dash specific variables
-var clientId = "amzn1.application-oa2-client."; // The client ID from your Security profile.
-var serialNumber = ""; // The device serial number. This must be unique
-var deviceModel = ""; // The device Modeal ID from your DRS Developer Console
+var serialNumber = "X000000001"; // The device serial number. This must be unique and must be retrieved when app connects to the smart device.
+var deviceModel = "Coffee_Machine_X1"; // The device Modeal ID from your DRS Developer Console
 var includeAllMarketplaces = true; // This must be set to false for production. It will show all the unreleased marketplaces that have not been certified yet
 var isTestDevice = true; // This must be set to false for production. Purchases placed by this device will be test only
 
@@ -31,6 +31,7 @@ var isTestDevice = true; // This must be set to false for production. Purchases 
 var productName = "coffee"; // This will customise the product name at the top of the page
 var skipUri = null; // This will show the "Skip" button if set. It must be a URL
 var learnMoreUri = null; // This will show the "Learn more" button if set. It must be a URL
+
 /**
 * Don't modify below
 */
@@ -62,11 +63,12 @@ var app = {
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
     },
-
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
-        document.getElementById("getStarted").addEventListener('click', lwa.authorize);
+        if(id === "deviceready"){
+            document.getElementById("getStarted").addEventListener('click', lwa.authorize);    
+        }
     }
 };
 
@@ -85,10 +87,10 @@ var lwa = {
             scope: drsScope,
             scope_data: scopeData
         };
-        window.AmazonLoginPlugin.authorize(options, function(success){
-            console.log(success);
+        window.LoginWithAmazon.authorize(options, function(success){
+            console.log(JSON.stringify(success));
         }, function(error){
-            console.log(error);
+            console.log(JSON.stringify(error));
         })
     }
 }

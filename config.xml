@@ -4,7 +4,7 @@
     <description>
         A sample app to display the DRS functionality in Cordova
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
+    <author email="lucasale@amazon.com" href="http://cordova.io">
         Luca Sale
     </author>
     <content src="index.html" />

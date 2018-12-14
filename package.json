@@ -17,5 +17,9 @@
             "cordova-plugin-whitelist": {}
         },
         "platforms": []
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lsale/DRS-Sample-Cordova.git"
     }
 }
