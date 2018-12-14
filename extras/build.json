@@ -1,0 +1,15 @@
+/*
+ * This file should be removed or modified if you wish to sign with your own key.
+ *
+ */
+{
+    "android": {
+        "debug": {
+            "keystore": "./sample.jks",
+            "storePassword": "sample",
+            "alias": "sampleKeyStore",
+            "password" : "sample",
+            "keystoreType": ""
+        }
+    }
+}
