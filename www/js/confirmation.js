@@ -43,17 +43,9 @@
 *   Modify below here
 */
 
-// Dash specific variables
-var serialNumber = "X000000001"; // The device serial number. This must be unique and must be retrieved when app connects to the smart device.
-var deviceModel = "Coffee_Machine_X1"; // The device Model ID from your DRS Developer Console
-var includeAllMarketplaces = true; // This must be set to false for production. It will show all the unreleased marketplaces that have not been certified yet
-var isTestDevice = true; // This must be set to false for production. Purchases placed by this device will be test only
-
 
 //Page specific variables
 var productName = "coffee"; // This will customise the product name at the top of the page
-var skipUri = null; // This will show the "Skip" button if set. It must be a URL
-var learnMoreUri = null; // This will show the "Learn more" button if set. It must be a URL
 
 /**
 * Don't modify below
@@ -61,38 +53,22 @@ var learnMoreUri = null; // This will show the "Learn more" button if set. It mu
 var app = {
     // Application Constructor
     initialize: function() {
+        this.initializeUI();
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.addEventListener('backbutton', this.handleBackKey, true); //Android only
+    },
+    // Initialize the UI layer
+    initializeUI: function(){
         if(productName){
             document.getElementById("productName").innerHTML = productName;
         }
-        if(skipUri){
-            var button = document.getElementById("skipUri");
-            button.style.display = "block";
-            button.addEventListener("click", function () {
-                window.location.href = skipUri;
-            })
-        }
-        if(learnMoreUri){
-            var button = document.getElementById("learnMoreUri");
-            button.style.display = "block";
-            button.addEventListener("click", function () {
-                window.location.href = learnMoreUri;
-            })
-        }
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        var plusButton = document.getElementById("plusButton");
+        var minusButton = document.getElementById("minusButton");
+        plusButton.addEventListener("click", inventory.change);
+        minusButton.addEventListener("click", inventory.change);
     },
-    toggleButtonsVisibility: function(){
-        var buttonArea = document.getElementById("optionalButtons");
-        var getStarted = document.getElementById("getStarted");
-        if(buttonArea.style.visibility == "hidden"){
-            // It's hidden, let's show it
-            buttonArea.style.visibility = "unset";
-            getStarted.innerHTML = "Get Started";
-        }else {
-            // It's visible, let's hide it
-            buttonArea.style.visibility = "hidden";
-            getStarted.disabled = true;
-            getStarted.innerHTML = "<img src=\"images/rolling.gif\" width=\"40\"/>";
-        }
+    handleBackKey: function(){
+        // Do nothing. We don't want customers to go back to the teaser page as we have already obtained the tokens at this stage.
     },
     // deviceready Event Handler
     //
@@ -105,44 +81,35 @@ var app = {
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
         if(id === "deviceready"){
-            document.getElementById("getStarted").addEventListener('click', lwa.authorize);    
+            document.getElementById("saveAndFinish").addEventListener('click', inventory.save);    
         }
-    },
-    sendToConfirmationScreen: function(data){
-        console.log(data)
-        // You should send these two tokens to your back-end server
-        // sendtoServer(data)
-        // We can also save them for later use
-        window.sessionStorage.setItem("access_token", data.access_token);
-        window.sessionStorage.setItem("refresh_token", data.refresh_token);
-        window.sessionStorage.setItem("client_id", data.client_id);
-        //Moving to the confirmation screen
-        window.location.href = "confirmation.html";
     }
 };
 
-var lwa = {
-    authorize: function(){
-        console.log("Starting LwA authorization");
-        app.toggleButtonsVisibility();
-        var drsScope = 'dash:replenish';
-        var scopeData = new Object();
-        scopeData[drsScope] = {
-            device_model: deviceModel,
-            serial: serialNumber,
-            should_include_non_live: includeAllMarketplaces,
-            is_test_device: isTestDevice
-        };
-        var options = {
-            scope: drsScope,
-            scope_data: scopeData
-        };
-        window.LoginWithAmazon.authorize(options, function(success){
-            app.sendToConfirmationScreen(success);
-        }, function(error){
-            console.log(JSON.stringify(error));
-            app.toggleButtonsVisibility();
-        })
+var inventory = {
+    field: null,
+    change: function(caller){
+        var changeBy = 0
+        switch(caller.srcElement.id){
+            case "plusButton":
+            changeBy = 1;
+            break;
+            case "minusButton":
+            changeBy = -1;
+            break;
+        }
+        if(!this.field){
+            this.field = document.getElementById("inventoryField");
+        }
+        var currentValue = parseInt(this.field.value) || 0;
+        if(changeBy < 0 && currentValue == 0){
+            return;
+        }
+        this.field.value = currentValue+changeBy;
+    },
+    save: function(){
+        //Send the inventory to the back-end server and take the user to the mainscreen
+        console.log("Done! Inventory is: "+this.field.value);
     }
 }
 

@@ -1,4 +1,4 @@
-/*
+<!--
  * Copyright 2016-2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Except as set forth below, this software is licensed under the Amazon Software License (the "License").  You may not use this software except in compliance with the License.
@@ -37,113 +37,75 @@
  * 5. Limitation of Liability.
  * EXCEPT AS PROHIBITED BY APPLICABLE LAW, IN NO EVENT AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE SHALL ANY LICENSOR BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF OR RELATED TO THIS LICENSE, THE USE OR INABILITY TO USE THE WORK (INCLUDING BUT NOT LIMITED TO LOSS OF GOODWILL, BUSINESS INTERRUPTION, LOST PROFITS OR DATA, COMPUTER FAILURE OR MALFUNCTION, OR ANY OTHER COMM ERCIAL DAMAGES OR LOSSES), EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
  * Effective Date – April 18, 2008 © 2008 Amazon.com, Inc. or its affiliates. All rights reserved.
- */
-
-/* 
-*   Modify below here
-*/
-
-// Dash specific variables
-var serialNumber = "X000000001"; // The device serial number. This must be unique and must be retrieved when app connects to the smart device.
-var deviceModel = "Coffee_Machine_X1"; // The device Model ID from your DRS Developer Console
-var includeAllMarketplaces = true; // This must be set to false for production. It will show all the unreleased marketplaces that have not been certified yet
-var isTestDevice = true; // This must be set to false for production. Purchases placed by this device will be test only
-
-
-//Page specific variables
-var productName = "coffee"; // This will customise the product name at the top of the page
-var skipUri = null; // This will show the "Skip" button if set. It must be a URL
-var learnMoreUri = null; // This will show the "Learn more" button if set. It must be a URL
-
-/**
-* Don't modify below
-*/
-var app = {
-    // Application Constructor
-    initialize: function() {
-        if(productName){
-            document.getElementById("productName").innerHTML = productName;
-        }
-        if(skipUri){
-            var button = document.getElementById("skipUri");
-            button.style.display = "block";
-            button.addEventListener("click", function () {
-                window.location.href = skipUri;
-            })
-        }
-        if(learnMoreUri){
-            var button = document.getElementById("learnMoreUri");
-            button.style.display = "block";
-            button.addEventListener("click", function () {
-                window.location.href = learnMoreUri;
-            })
-        }
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
-    toggleButtonsVisibility: function(){
-        var buttonArea = document.getElementById("optionalButtons");
-        var getStarted = document.getElementById("getStarted");
-        if(buttonArea.style.visibility == "hidden"){
-            // It's hidden, let's show it
-            buttonArea.style.visibility = "unset";
-            getStarted.innerHTML = "Get Started";
-        }else {
-            // It's visible, let's hide it
-            buttonArea.style.visibility = "hidden";
-            getStarted.disabled = true;
-            getStarted.innerHTML = "<img src=\"images/rolling.gif\" width=\"40\"/>";
-        }
-    },
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        console.log('Received Event: ' + id);
-        if(id === "deviceready"){
-            document.getElementById("getStarted").addEventListener('click', lwa.authorize);    
-        }
-    },
-    sendToConfirmationScreen: function(data){
-        console.log(data)
-        // You should send these two tokens to your back-end server
-        // sendtoServer(data)
-        // We can also save them for later use
-        window.sessionStorage.setItem("access_token", data.access_token);
-        window.sessionStorage.setItem("refresh_token", data.refresh_token);
-        window.sessionStorage.setItem("client_id", data.client_id);
-        //Moving to the confirmation screen
-        window.location.href = "confirmation.html";
-    }
-};
-
-var lwa = {
-    authorize: function(){
-        console.log("Starting LwA authorization");
-        app.toggleButtonsVisibility();
-        var drsScope = 'dash:replenish';
-        var scopeData = new Object();
-        scopeData[drsScope] = {
-            device_model: deviceModel,
-            serial: serialNumber,
-            should_include_non_live: includeAllMarketplaces,
-            is_test_device: isTestDevice
-        };
-        var options = {
-            scope: drsScope,
-            scope_data: scopeData
-        };
-        window.LoginWithAmazon.authorize(options, function(success){
-            app.sendToConfirmationScreen(success);
-        }, function(error){
-            console.log(JSON.stringify(error));
-            app.toggleButtonsVisibility();
-        })
-    }
-}
-
-app.initialize();
+ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Dash Replenishment Service - Confirmation</title>
+    </head>
+    <body>
+        <div class="dash">
+            <div id="debugInfo"></div>
+            <div class="container">
+                <div class="logo">
+                    <img src="images/dash_logo_white.png">
+                </div>
+                <div class="tagline">
+                   All Done!
+                </div>
+                <div class="illustration">
+                    <img src="images/confirmation_page_coffee_machine.png">
+                </div>
+                <div class="description">
+                    You have successfully enabled Amazon Dash Replenishment to automatically reorder coffee when you are running low.
+                </div>
+                <div class="inventory">
+                    <span class="inventory_title">
+                        Do you have <span id="productName">products</span> yet?
+                    </span>
+                    <div class="consumable_photo">
+                        <img src="images/confirmation_page_consumable.png">
+                    </div>
+                    <div class="inventory_setter">
+                        <div class="inventory_setter_section">
+                            I have
+                        </div>
+                        <div  class="inventory_setter_section">
+                            <div class="setter_box">
+                                <button class="action_button" id="plusButton"> + </button>
+                            </div>
+                            <div class="setter_box">
+                                <input type="number" id="inventoryField" name="inventory" placeholder="0" class="inventory_field">
+                            </div>
+                            <div class="setter_box">
+                                <button class="action_button" id="minusButton"> - </button>
+                            </div>
+                        </div>
+                        <div class="inventory_setter_section">
+                            capsules
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button type="button" id="saveAndFinish">Save and Finish</button>          
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/confirmation.js"></script>
+    </body>
+</html>
