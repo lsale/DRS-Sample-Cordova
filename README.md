@@ -33,13 +33,13 @@ Where:
 Instructions to customize the installation with your own API key and package name are available on the [plugin github page](https://github.com/lsale/cordova-plugin-login-with-amazon-dash.git).
 
 ### (Quick) Installing the plugin with sample credentials (1 min installation)
+#### 1. Install using the sample API credentials
 If you haven't created an API key yet, and you just want to test out the sample, feel free to use the sample credentials and install the plugin as follows:
 * `cordova plugin add https://github.com/lsale/cordova-plugin-login-with-amazon --variable IOS_API_KEY=eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmQ0MWQ2OWYxZGJiNTQ2MThhNzNlM2MwN2E1MDc0ZjNlIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi5kYzQ4MWZmZGQ3OTM0NjY2YjBkNTdkYWExMGJiOTdlOCIsImJ1bmRsZVNlZWRJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJidW5kbGVJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJpc3MiOiJBbWF6b24iLCJ0eXBlIjoiQVBJS2V5IiwiYXBwVmFyaWFudElkIjoiYW16bjEuYXBwbGljYXRpb24tY2xpZW50LmViODZjMWE1MWIwYzRkOWE4ODM4NTE0NDg4OWQ4ZTA2IiwidHJ1c3RQb29sIjpudWxsLCJhcHBJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC5lYjg2YzFhNTFiMGM0ZDlhODgzODUxNDQ4ODlkOGUwNiIsImlkIjoiMTE3ZjMwYjMtZmZiZC0xMWU4LWI5OTItMTk4ZGQ5MTM3ZTRjIiwiaWF0IjoiMTU0NDgwNDgxNDIzMSJ9.jntLNSctn0/zOkFoeIEkoMPbcMSfUD2U6snrf0qsAljaG70HfvFgPa8VSIrMfhtEc1jzMWUuJW1M3ZM8mSC2B0RR3YBiu4K6mVdbZAeUaAjdUBFJmJAsfa9T+OixM+Fh6Bn/TYVPro4/DMFLzMv3rv4URifdIu+kpMwgQHYCJ8G7rFWLwfgPaCoNys0ADOz6iu3Yv++nU8xTnm8e3ekXvnA0RiXDa36cE2D+UeUw5yBlm4zyY54QmXnMwUc9nmcxPOUTOosiZh8CNokzsOShanisrZscBbwqy7W5eJOEyF3tIPYq4FeG234gJ754TTzksC6jwxhCBB6uMyRrQgROgA== --variable IOS_BUNDLE_NAME=com.amazon.drs.drsteaserpage`
 
-## 5. Platform specific configuration
-### 1. (Android only) - Add the API Key in your Android project
+#### 2. (Android only) - Add the API Key in your Android project
 Move the entire `MYPROJECT/extras/assets` directory to `MYPROJECT/platforms/android/`
-1. Run `mv extras/assets platforms/android/`
+1. Run `mv extras/assets/api_key.txt platforms/android/app/src/main/assets/`
 
 The api_key.txt file contained in it, uses sample credentials. Refer to the  "Customize the Cordova Sample" section if you wish to change it.
 
