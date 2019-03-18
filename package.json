@@ -10,13 +10,23 @@
     "author": "Luca Sale",
     "license": "Apache-2.0",
     "dependencies": {
+        "cordova-android": "^7.1.4",
+        "cordova-plugin-add-swift-support": "^1.7.2",
+        "cordova-plugin-android-support-v4-jar": "^23.2.1",
+        "cordova-plugin-login-with-amazon-dash": "file:../../Github/cordova-plugin-login-with-amazon-dash",
         "cordova-plugin-whitelist": "^1.3.3"
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-login-with-amazon-dash": {
+                "IOS_API_KEY": "eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmQ0MWQ2OWYxZGJiNTQ2MThhNzNlM2MwN2E1MDc0ZjNlIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi5kYzQ4MWZmZGQ3OTM0NjY2YjBkNTdkYWExMGJiOTdlOCIsImJ1bmRsZVNlZWRJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJidW5kbGVJZCI6ImNvbS5hbWF6b24uZHJzLmRyc3RlYXNlcnBhZ2UiLCJpc3MiOiJBbWF6b24iLCJ0eXBlIjoiQVBJS2V5IiwiYXBwVmFyaWFudElkIjoiYW16bjEuYXBwbGljYXRpb24tY2xpZW50LmViODZjMWE1MWIwYzRkOWE4ODM4NTE0NDg4OWQ4ZTA2IiwidHJ1c3RQb29sIjpudWxsLCJhcHBJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC5lYjg2YzFhNTFiMGM0ZDlhODgzODUxNDQ4ODlkOGUwNiIsImlkIjoiMTE3ZjMwYjMtZmZiZC0xMWU4LWI5OTItMTk4ZGQ5MTM3ZTRjIiwiaWF0IjoiMTU0NDgwNDgxNDIzMSJ9.jntLNSctn0/zOkFoeIEkoMPbcMSfUD2U6snrf0qsAljaG70HfvFgPa8VSIrMfhtEc1jzMWUuJW1M3ZM8mSC2B0RR3YBiu4K6mVdbZAeUaAjdUBFJmJAsfa9T+OixM+Fh6Bn/TYVPro4/DMFLzMv3rv4URifdIu+kpMwgQHYCJ8G7rFWLwfgPaCoNys0ADOz6iu3Yv++nU8xTnm8e3ekXvnA0RiXDa36cE2D+UeUw5yBlm4zyY54QmXnMwUc9nmcxPOUTOosiZh8CNokzsOShanisrZscBbwqy7W5eJOEyF3tIPYq4FeG234gJ754TTzksC6jwxhCBB6uMyRrQgROgA==",
+                "IOS_BUNDLE_NAME": "com.amazon.drs.drsteaserpage"
+            }
         },
-        "platforms": []
+        "platforms": [
+            "android"
+        ]
     },
     "repository": {
         "type": "git",
